@@ -2,6 +2,10 @@
 
 All notable changes to `date-time-range-picker` will be documented in this file.
 
+## fix tailwind miss css - 2023-04-13
+
+- Adding bottom unset to tailwin css
+
 ## release - 2023-04-13
 
 Sending some
