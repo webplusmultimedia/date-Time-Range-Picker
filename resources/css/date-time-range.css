@@ -2,9 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @layer utilities {
-    @variants responsive {
-        .bottom-unset {
-            bottom: unset;
-        }
+    .bottom-unset {
+        bottom: unset;
     }
 }

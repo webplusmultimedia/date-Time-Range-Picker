@@ -13,9 +13,7 @@ class DateTimeRangePicker extends Component
     public string $name = '';
 
     public ?string $label = null;
-    /**
-     * @var array
-     */
+
     public array $config = [
         'lang' => 'fr-FR',
         'type' => 'date', //date, datetime, time, range
