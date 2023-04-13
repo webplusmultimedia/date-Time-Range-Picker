@@ -2,6 +2,11 @@
 
 All notable changes to `date-time-range-picker` will be documented in this file.
 
+## missing color changing - 2023-04-13
+
+- fix : missing color changing
+- @webplusmultimedia
+
 ## fix tailwind miss css - 2023-04-13
 
 - Adding bottom unset to tailwin css
