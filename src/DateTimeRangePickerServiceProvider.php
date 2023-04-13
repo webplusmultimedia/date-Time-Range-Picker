@@ -4,7 +4,6 @@ namespace Webplusmultimedia\DateTimeRangePicker;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Webplusmultimedia\DateTimeRangePicker\Commands\DateTimeRangePickerCommand;
 
 class DateTimeRangePickerServiceProvider extends PackageServiceProvider
 {
@@ -19,7 +18,6 @@ class DateTimeRangePickerServiceProvider extends PackageServiceProvider
             ->name('date-time-range-picker')
             ->hasConfigFile()
             ->hasViews()
-
-            ->hasCommand(DateTimeRangePickerCommand::class);
+            ->hasViewComponent(prefix: 'webplusm', viewComponentName: Components\DateTimeRangePicker::class);
     }
 }

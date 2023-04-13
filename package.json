@@ -1,0 +1,34 @@
+{
+  "name": "date-time-range-picker",
+  "version": "1.0.0",
+  "description": "[![Latest Version on Packagist](https://img.shields.io/packagist/v/webplusmultimedia/date-time-range-picker.svg?style=flat-square)](https://packagist.org/packages/webplusmultimedia/date-time-range-picker) [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/webplusmultimedia/date-time-range-picker/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/webplusmultimedia/date-time-range-picker/actions?query=workflow%3Arun-tests+branch%3Amain) [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/webplusmultimedia/date-time-range-picker/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/webplusmultimedia/date-time-range-picker/actions?query=workflow%3A\"Fix+PHP+code+style+issues\"+branch%3Amain) [![Total Downloads](https://img.shields.io/packagist/dt/webplusmultimedia/date-time-range-picker.svg?style=flat-square)](https://packagist.org/packages/webplusmultimedia/date-time-range-picker)",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/webplusmultimedia/date-Time-Range-Picker.git"
+  },
+  "keywords": [
+    "date",
+    "datetime",
+    "time",
+    "dateRange"
+  ],
+  "author": "WebplusM <contact@webplusm.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/webplusmultimedia/date-Time-Range-Picker/issues"
+  },
+  "homepage": "https://github.com/webplusmultimedia/date-Time-Range-Picker#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "laravel-mix": "^6.0.49",
+    "postcss": "^8.4.21",
+    "tailwindcss": "^3.3.1"
+  }
+}
