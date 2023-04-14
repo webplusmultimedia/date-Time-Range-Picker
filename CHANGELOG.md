@@ -2,6 +2,10 @@
 
 All notable changes to `date-time-range-picker` will be documented in this file.
 
+## add more infos in readme file - 2023-04-14
+
+add more infos in readme file
+
 ## fix calendar up/dow month - 2023-04-14
 
 ### Changes
