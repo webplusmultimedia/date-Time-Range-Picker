@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Webplusmultimedia\DateTimeRangePicker\Components;
 
-use Carbon\CarbonInterface;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
