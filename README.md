@@ -44,9 +44,9 @@ In your blade view livewire :
 - **label** : {string} (null by default) the Label to play
 - **minDate** and **maxDate** : {ISO8601 (Carbon\CarbonInterface|null)} (null by default), if you need restricting dates
 - **lang** : {dateString} (fr by default(e.g : fr-FR ...))
-- **minTime** : {int} (7(hour) by default) , minimum time to reach
-- **maxime** : {int} (17(hour) by default) , maximum time to reach
-- **intervalMinute** : {int} (5 by default) , maximum time to reach
+- **minTime** : {int} (7(h) by default) , minimum time to reach
+- **maxTime** : {int} (17(h) by default) , maximum time to reach
+- **intervalMinute** : {int} (5 by default) , interval up/down for minutes (time and datetime type)
 
 ## Testing
 

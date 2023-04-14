@@ -51,8 +51,8 @@ export function listeDate(date) {
                 }
                 return;
             }
-            this.selectedDay = this.date
-            this.set_selectedDay(this.date)
+            this.selectedDay = new Date(this.date.getFullYear(),this.date.getMonth(),this.selectedDay.getDate(),this.selectedDay.getHours(),this.selectedDay.getMinutes())
+            this.set_selectedDay(this.selectedDay)
             this.showDateTime()
         },
         /* Events binding for date btn */
