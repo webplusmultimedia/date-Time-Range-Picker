@@ -16,8 +16,6 @@ export const checkConfig = data => {
         data.selectedDay = date
     }
 
-    //console.log(date,data.get_selectedDay())
-
     if (data.configTypeMatch(['date','range']) && data.config.minDate && data.config.maxDate){
             date = new Date(data.config.minDate)
        /* if(data.selectedDay.getTime() < date.getTime() ){
@@ -30,4 +28,5 @@ export const checkConfig = data => {
 
     }
     data.day = date.toISOString()
+    data.getDates()
 };

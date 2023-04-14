@@ -9,11 +9,9 @@ This is where your description should go. Limit it to a paragraph or two. Consid
 
 ## Support us
 
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/date-time-range-picker.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/date-time-range-picker)
+[<img src="https://i.postimg.cc/0jTRWDYR/Date-time-range-picker-webplus-multim-dia-2.jpg"  />](https://webplusm.net)
 
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+Here is a date, dateTime and date range picker for livewire made for Tall Stack
 
 ## Installation
 
@@ -23,27 +21,7 @@ You can install the package via composer:
 composer require webplusmultimedia/date-time-range-picker
 ```
 
-You can publish and run the migrations with:
-
-```bash
-php artisan vendor:publish --tag="date-time-range-picker-migrations"
-php artisan migrate
-```
-
-You can publish the config file with:
-
-```bash
-php artisan vendor:publish --tag="date-time-range-picker-config"
-```
-
-This is the contents of the published config file:
-
-```php
-return [
-];
-```
-
-Optionally, you can publish the views using
+Optionally, you can publish the views using, but don't need that.
 
 ```bash
 php artisan vendor:publish --tag="date-time-range-picker-views"
@@ -51,13 +29,28 @@ php artisan vendor:publish --tag="date-time-range-picker-views"
 
 ## Usage
 
-```php
-$dateTimeRangePicker = new Webplusmultimedia\DateTimeRangePicker();
-echo $dateTimeRangePicker->echoPhrase('Hello, Webplusmultimedia!');
+In your blade view livewire :
+```html
+<div class="pt-5">
+    <x-webplusm-date-time-range-picker type="range" label="Dates de formation" 
+                                       wire:model="date" 
+    />
+</div>
 ```
+
+## Component attributes :
+
+- **type** : {string} (date by default) date, datetime or range 
+- **label** : {string} (null by default) the Label to play
+- **minDate** and **maxDate** : {ISO8601 (Carbon\CarbonInterface|null)} (null by default), if you need restricting dates
+- **lang** : {dateString} (fr by default(e.g : fr-FR ...))
+- **minTime** : {int} (7(hour) by default) , minimum time to reach
+- **maxime** : {int} (17(hour) by default) , maximum time to reach
+- **intervalMinute** : {int} (5 by default) , maximum time to reach
 
 ## Testing
 
+Coming sooner
 ```bash
 composer test
 ```
@@ -77,7 +70,6 @@ Please review [our security policy](../../security/policy) on how to report secu
 ## Credits
 
 - [webplusm](https://github.com/webplusmultimedia)
-- [All Contributors](../../contributors)
 
 ## License
 

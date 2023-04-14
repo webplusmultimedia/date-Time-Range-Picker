@@ -7,7 +7,7 @@
 >
     <div class="relative" >
         <label :for="$id('text-input')">{{ $label }}</label>
-        <input type="text" x-model="value" :id="$id('text-input')" x-on:click="toggle" class="cursor-pointer "
+        <input type="text" x-model="value" :id="$id('text-input')" x-on:click="toggle" class="cursor-pointer"
                readonly
         >
         <div class="flex justify-between absolute right-3 bottom-0">
@@ -51,8 +51,8 @@
                 </div>
                 <template x-if="configTypeMatch(['date','range'])" >
                     <div class="flex flex-wrap" x-show="isCalendar()">
-                        <template x-for="(date,index) in getDates()" :key="'web-'+index">
-                            <div x-data="listeDate(date)"
+                        <template x-for="jour in daysText" :key="jour.getTime()">
+                            <div x-data="listeDate(jour)"
                                  class="relative flex justify-center basis-[14.2857%] py-1 text-slate-600 duration-200"
                                  x-bind="listeGrid"
                             >

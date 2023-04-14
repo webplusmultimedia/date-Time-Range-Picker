@@ -8,7 +8,7 @@ export function listeDate(date) {
     return {
         date,
         isNotCurrentMonth() {
-            return (this.month !== (this.date.getMonth() + 1) && !this.isSelectDay(this.date)) || this.isDisabled()
+            return (this.month !== (this.date.getMonth() ) /*&& !this.isSelectDay(date)*/) || this.isDisabled()
         },
         isCurrentDate() {
             return this.date.toLocaleString(

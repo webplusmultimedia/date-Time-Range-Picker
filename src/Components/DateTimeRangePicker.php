@@ -21,16 +21,18 @@ class DateTimeRangePicker extends Component
         'maxDate' => null,
         'minTime' => 7,
         'maxTime' => 17,
-        'rangeMinuteBy' => 5, // by 5 min
+        'intervalMinute' => 5, // by 5 min
     ];
 
     public function __construct(
         ?string $type = 'date',
         ?string $lang = 'fr-FR',
-        null|CarbonInterface $minDate = null,
-        null|CarbonInterface $maxDate = null,
-        null|int $rangeMinuteBy = 5,
-        string $label = 'Mon label'
+        null|string $minDate = null,
+        null|string $maxDate = null,
+        null|int $intervalMinute = 5,
+        int $minTime = 7,
+        int $maxTime = 17,
+        string $label = 'My label'
 
     ) {
 
@@ -44,8 +46,10 @@ class DateTimeRangePicker extends Component
         $this->config['type'] = $type;
         $this->config['minDate'] = $minDate;
         $this->config['maxDate'] = $maxDate;
+        $this->config['minTime'] = $minTime;
+        $this->config['maxTime'] = $maxTime;
         $this->config['lang'] = $lang;
-        $this->config['rangeMinuteBy'] = $rangeMinuteBy;
+        $this->config['intervalMinute'] = $intervalMinute;
     }
 
     public function render(): View

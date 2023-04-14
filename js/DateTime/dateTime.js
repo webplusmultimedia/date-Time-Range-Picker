@@ -3,7 +3,7 @@ import {checkConfig} from "./Support/checkConfig";
 /**
  *
  * @param {string} dayDate
- * @param {{type : string,lang : string,minDate:Date|boolean,maxDate:Date|boolean,minTime : number, maxTime : number, rangeMinuteBy :number}} config
+ * @param {{type : string,lang : string,minDate:Date|boolean,maxDate:Date|boolean,minTime : number, maxTime : number, intervalMinute :number}} config
  */
 export function webplusDateTime(dayDate, config) {
     return {
@@ -25,6 +25,7 @@ export function webplusDateTime(dayDate, config) {
         setMonth(month) {
             let date = new Date(this.day).setMonth(month)
             this.day = new Date(date).toISOString()
+            this.getDates()
             this.whatToShow = 'years'
         },
         config,
@@ -32,6 +33,7 @@ export function webplusDateTime(dayDate, config) {
         setYears(year) {
             let date = new Date(this.day).setFullYear(year)
             this.day = new Date(date).toISOString()
+            this.getDates()
             this.whatToShow = 'calendar'
         },
         whatToShow: 'calendar',
@@ -72,9 +74,19 @@ export function webplusDateTime(dayDate, config) {
         },
         toggle() {
             this.show = !this.show
-            if (this.show && !this.configTypeMatch('range') && this.selectedDay) {
-                this.day = this.selectedDay.toISOString()
+            if (this.show && !this.configTypeMatch('time') && this.selectedDay) {
+                if (!this.configTypeMatch('range')) {
+                    this.day = this.selectedDay.toISOString()
+                }
+                else {
+                    if(this.rangeSelected.start_at){
+                        this.day = this.rangeSelected.start_at.toISOString()
+                    }
+                }
+                this.getDates()
             }
+
+
             if (this.configTypeMatch(['date', 'range'])) {
                 this.whatToShow = 'calendar'
                 return
@@ -105,9 +117,10 @@ export function webplusDateTime(dayDate, config) {
             else this.dayDate = dateOrRange
         },
         getDaysName() {
-            let date = this.startOfWeek(new Date(Date.parse(this.day))),
+            let date = new Date(Date.parse(this.day)),
                 daysName = []
-            this.month = date.getMonth() + 1
+            date = new Date(date.setDate(date.getDate() - date.getDay() + 1))
+            //this.month = date.getMonth() + 1
             for (let i = 0; i < 7; i++) {
                 daysName.push(this.upperCaseF(date.toLocaleDateString(config.lang, {weekday: 'short'})))
                 date.setDate(date.getDate() + 1)
@@ -125,14 +138,18 @@ export function webplusDateTime(dayDate, config) {
 
             return this.upperCaseF(date.toLocaleDateString(config.lang, {month: 'long', year: "numeric"}))
         },
+        daysText : [],
         getDates() {
             let date = new Date(Date.parse(this.day)),
                 dates = []
-            date = this.startOfWeek(new Date(date.setDate(1)))
+            date = new Date(date.setDate(1))
+            this.month = date.getMonth()
+            date = this.startOfWeek(date)
             for (let i = 0; i < 42; i++) {
                 dates.push(new Date(date))
                 date.setDate(date.getDate() + 1)
             }
+            this.daysText = dates
             return dates
         },
         /**
@@ -140,16 +157,24 @@ export function webplusDateTime(dayDate, config) {
          * @param {Date} date
          */
         startOfWeek(date) {
+            if(date.getDay()===0) {
+                return new Date(date.setDate(date.getDate() -6))
+            }
+            if(date.getDay()===1) {
+                date.setDate(- 6)
+            }
             return new Date(date.setDate(date.getDate() - date.getDay() + 1))
         },
         upMonth() {
             let date = new Date(this.day)
             this.day = new Date(date.setMonth(date.getMonth() + 1)).toISOString()
+            this.getDates()
         },
         downMonth() {
             let date = new Date(this.day)
+            //this.month = date.getMonth() - 1
             this.day = new Date(date.setMonth(date.getMonth() - 1)).toISOString()
-
+            this.getDates()
         },
         getMonthNames() {
             let date = new Date(Date.parse(this.day)),
@@ -196,6 +221,7 @@ export function webplusDateTime(dayDate, config) {
                 }
                 return this.selectedDay.toLocaleDateString(config.lang, options)
             }
+
             if (this.configTypeMatch('range')) {
                 if (this.rangeSelected.start_at) {
                     return `${this.rangeSelected.start_at.toLocaleDateString(config.lang)} - ${this.rangeSelected.end_at.toLocaleDateString(config.lang)}`
@@ -212,7 +238,6 @@ export function webplusDateTime(dayDate, config) {
             return new Date(date.setDate(date.getDate() - date.getDay() + 1))
         },
         init() {
-            //this.$watch('selectedDay', selectedDay => console.log(selectedDay))
             checkConfig(this)
         }
 

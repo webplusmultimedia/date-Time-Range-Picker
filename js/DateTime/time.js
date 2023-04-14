@@ -13,11 +13,11 @@ export default function () {
         }, changeMinute(delta) {
             if (delta < 0) {
                 if (this.selectedDay.getMinutes() !== 0) {
-                    this.selectedDay = new Date(this.selectedDay.setMinutes(this.selectedDay.getMinutes() - this.config.rangeMinuteBy))
+                    this.selectedDay = new Date(this.selectedDay.setMinutes(this.selectedDay.getMinutes() - this.config.intervalMinute))
                 }
             } else {
-                if (this.selectedDay.getMinutes() !== (60 - this.config.rangeMinuteBy)) {
-                    this.selectedDay = new Date(this.selectedDay.setMinutes(this.selectedDay.getMinutes() + this.config.rangeMinuteBy))
+                if (this.selectedDay.getMinutes() !== (60 - this.config.intervalMinute)) {
+                    this.selectedDay = new Date(this.selectedDay.setMinutes(this.selectedDay.getMinutes() + this.config.intervalMinute))
                 }
             }
         }, 'changeHours': {
