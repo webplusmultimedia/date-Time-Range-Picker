@@ -2,6 +2,13 @@
 
 All notable changes to `date-time-range-picker` will be documented in this file.
 
+## fix calendar up/dow month - 2023-04-14
+
+### Changes
+
+- fix : Change the way to fill the calendar
+- fix :+1:  save time when it give
+
 ## missing color changing - 2023-04-13
 
 - fix : missing color changing
