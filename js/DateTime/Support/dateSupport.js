@@ -12,9 +12,15 @@ const isGreaterThan = (date1, date2) => {
 const isLowerThan = (date1, date2) => {
     return date1.getTime() <= date2.getTime()
 }
+/**
+ * @param {Date} date
+ * @return {Date}
+ */
+const getDateTime = (date)=>{
+    return new Date(date.getFullYear(),date.getMonth(),date.getDate(),date.getHours(),date.getMinutes())
+}
 
-
-class Period {
+    class Period {
     /**@property {Date} _start_at  */
     _start_at;
     /**@property {Date} _end_at  */
@@ -108,5 +114,5 @@ class StringTime {
     }
 }
 
-export {isGreaterThan, isLowerThan, Period, StringTime};
+export {isGreaterThan, isLowerThan,getDateTime, Period, StringTime};
 

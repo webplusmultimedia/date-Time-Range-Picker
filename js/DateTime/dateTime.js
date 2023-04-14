@@ -114,13 +114,20 @@ export function webplusDateTime(dayDate, config) {
             if (typeof dateOrRange === 'object' && dateOrRange.start_at) {
                 this.dayDate = [dateOrRange.start_at, dateOrRange.end_at]
             }
-            else this.dayDate = dateOrRange
+            if(this.configTypeMatch('date')){
+                this.dayDate = dateOrRange
+                return
+            }
+            if(this.configTypeMatch('time')){
+                this.dayDate = dateOrRange.toLocaleString()
+                return
+            }
+
         },
         getDaysName() {
             let date = new Date(Date.parse(this.day)),
                 daysName = []
             date = new Date(date.setDate(date.getDate() - date.getDay() + 1))
-            //this.month = date.getMonth() + 1
             for (let i = 0; i < 7; i++) {
                 daysName.push(this.upperCaseF(date.toLocaleDateString(config.lang, {weekday: 'short'})))
                 date.setDate(date.getDate() + 1)

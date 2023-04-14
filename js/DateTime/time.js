@@ -10,6 +10,7 @@ export default function () {
                     this.selectedDay = new Date(this.selectedDay.setHours(this.selectedDay.getHours() + 1))
                 }
             }
+            this.set_selectedDay(this.selectedDay)
         }, changeMinute(delta) {
             if (delta < 0) {
                 if (this.selectedDay.getMinutes() !== 0) {
@@ -20,7 +21,15 @@ export default function () {
                     this.selectedDay = new Date(this.selectedDay.setMinutes(this.selectedDay.getMinutes() + this.config.intervalMinute))
                 }
             }
-        }, 'changeHours': {
+            this.set_selectedDay(this.selectedDay) 
+        },
+        saveMinute(minutes){
+            return new Date(this.selectedDay.setMinutes(this.selectedDay.getMinutes() + minutes))
+        },
+        saveHours(hours){
+
+        },
+        'changeHours': {
             ['x-on:wheel.prevent.stop']() {
                 this.changeHour(this.$event.wheelDeltaY)
             },

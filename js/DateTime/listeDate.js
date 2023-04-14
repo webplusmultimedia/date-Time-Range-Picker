@@ -32,10 +32,10 @@ export function listeDate(date) {
             if (this.period) {
                 if (!this.period.isBetween(this.date)) return
             }
-            if (!this.selectedDay && this.configTypeMatch('time')) {
+            /*if (!this.selectedDay && this.configTypeMatch('time')) {
                 this.date.setHours(this.config.minTime)
                 this.date.setMinutes(0)
-            }
+            }*/
 
             if (this.configTypeMatch('range')) {
                 if (!this._rangeSelected.start_at) {
