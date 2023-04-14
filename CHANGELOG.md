@@ -2,6 +2,10 @@
 
 All notable changes to `date-time-range-picker` will be documented in this file.
 
+## fix for type = time - 2023-04-14
+
+- fix returning time for type = time
+
 ## add more infos in readme file - 2023-04-14
 
 add more infos in readme file
