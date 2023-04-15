@@ -16,11 +16,39 @@ const isLowerThan = (date1, date2) => {
  * @param {Date} date
  * @return {Date}
  */
-const getDateTime = (date)=>{
-    return new Date(date.getFullYear(),date.getMonth(),date.getDate(),date.getHours(),date.getMinutes())
+const getDateTime = (date) => {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes())
 }
 
-    class Period {
+/**
+ * @param {string} time - ISO8601
+ * @return {boolean}
+ */
+const isValidTime = (time) => {
+    const times = time.split(':')
+    return times.length === 2 && parseInt(times[0]) < 23 && parseInt(times[1]) < 59
+}
+/**
+ * @param {Object} date
+ * @return {string}
+ */
+const setSelectedDate = (data) => {
+    let hours = data.selectedDay?.getHours() ? data.selectedDay.getHours() : data.day.getHours(),
+        minutes = data.selectedDay?.getMinutes() ? data.selectedDay.getMinutes() : data.day.getMinutes()
+    data.selectedDay = new Date(data.date.getFullYear(), data.date.getMonth(), data.date.getDate(), hours, minutes)
+    data.set_selectedDay(data.selectedDay)
+}
+/**
+ * @param {Date} date
+ * @return {string|null}
+ */
+const getModelValue = (date) => {
+    if (!date) return null
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`
+}
+const getMutable = date => new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0)
+
+class Period {
     /**@property {Date} _start_at  */
     _start_at;
     /**@property {Date} _end_at  */
@@ -31,8 +59,8 @@ const getDateTime = (date)=>{
      * @param {Date} date2
      */
     constructor(date1, date2) {
-        this._start_at = date1;
-        this._end_at = date2;
+        this._start_at = getMutable(date1);
+        this._end_at = getMutable(date2);
     }
 
     /**
@@ -44,7 +72,7 @@ const getDateTime = (date)=>{
     }
 
     isBetween(date, strict = false) {
-        return (isGreaterThan(date, this._start_at) && isLowerThan(date, this._end_at))
+        return (isGreaterThan(getMutable(date), this._start_at) && isLowerThan(getMutable(date), this._end_at))
     }
 
     /**
@@ -56,7 +84,7 @@ const getDateTime = (date)=>{
     }
 }
 
-class StringTime {
+class StringToTime {
     /**@type {string} */
     #_value
     #minTime = 7;
@@ -78,10 +106,12 @@ class StringTime {
             this.init()
         }
     }
+
     init() {
         this.hours = parseInt(this.splitTime()[0]) ?? 0
         this.minutes = parseInt(this.splitTime()[1]) ?? 0
     }
+
     /**
      *
      * @return {string[]}
@@ -89,6 +119,7 @@ class StringTime {
     splitTime() {
         return this.#_value.split(':')
     }
+
     /**
      *
      * @return {string}
@@ -98,21 +129,23 @@ class StringTime {
 
         return `${this.hours}`.padStart(2, '0')
     }
+
     getMinutesText() {
         return `${this.minutes}`.padStart(2, '0')
     }
-    getValueText(){
+
+    getValueText() {
         let suffixe = '', hours
-        if(this.h12){
+        if (this.h12) {
             suffixe = ' AM'
-            if (this.hours>12){
+            if (this.hours > 12) {
                 suffixe = ' PM'
-                hours = this.hours-12
+                hours = this.hours - 12
             }
         }
-        return `${hours??this.getHoursText()}:${this.getMinutesText()}${suffixe}`
+        return `${hours ?? this.getHoursText()}:${this.getMinutesText()}${suffixe}`
     }
 }
 
-export {isGreaterThan, isLowerThan,getDateTime, Period, StringTime};
+export {isGreaterThan, isLowerThan, getDateTime, setSelectedDate, getModelValue, isValidTime, Period, StringToTime};
 

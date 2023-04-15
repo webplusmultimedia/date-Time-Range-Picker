@@ -1,4 +1,5 @@
 import {checkConfig} from "./Support/checkConfig";
+import {getModelValue, Period} from "./Support/dateSupport"
 
 /**
  *
@@ -24,7 +25,7 @@ export function webplusDateTime(dayDate, config) {
         /**@param {number} month */
         setMonth(month) {
             let date = new Date(this.day).setMonth(month)
-            this.day = new Date(date).toISOString()
+            this.day = new Date(date)
             this.getDates()
             this.whatToShow = 'years'
         },
@@ -32,7 +33,7 @@ export function webplusDateTime(dayDate, config) {
         /**@param {number} year **/
         setYears(year) {
             let date = new Date(this.day).setFullYear(year)
-            this.day = new Date(date).toISOString()
+            this.day = new Date(date)
             this.getDates()
             this.whatToShow = 'calendar'
         },
@@ -74,29 +75,34 @@ export function webplusDateTime(dayDate, config) {
         },
         toggle() {
             this.show = !this.show
-            if (this.show && !this.configTypeMatch('time') && this.selectedDay) {
+            if (this.show && this.configTypeMatch(['date', 'range']) && this.selectedDay) {
                 if (!this.configTypeMatch('range')) {
-                    this.day = this.selectedDay.toISOString()
-                }
-                else {
-                    if(this.rangeSelected.start_at){
-                        this.day = this.rangeSelected.start_at.toISOString()
+                    this.day = this.selectedDay
+                } else {
+                    if (this.rangeSelected.start_at && this.rangeSelected.end_at ) {
+                        this.day = this.rangeSelected.start_at
+                    }
+                    if(this._periodRange){
+                        this._rangeSelected = this.resetRange()
+                        this.periodRange = Period.createFromRange(this.rangeSelected)
                     }
                 }
-                this.getDates()
             }
-
+            this.getDates()
 
             if (this.configTypeMatch(['date', 'range'])) {
                 this.whatToShow = 'calendar'
+
                 return
             }
-            if (this.configTypeMatch('time')) {
+            if (this.configTypeMatch('time') && this.show) {
                 if (!this.selectedDay) {
                     this.selectedDay = new Date()
                     this.selectedDay.setHours(config.minTime)
                     this.selectedDay.setMinutes(0)
+                    this.set_selectedDay(this.selectedDay)
                 }
+
                 this.whatToShow = 'times'
                 return
             }
@@ -111,15 +117,19 @@ export function webplusDateTime(dayDate, config) {
             return dayDate.initialValue
         },
         set_selectedDay(dateOrRange) {
-            if (typeof dateOrRange === 'object' && dateOrRange.start_at) {
-                this.dayDate = [dateOrRange.start_at, dateOrRange.end_at]
+            if (!dateOrRange){
+                this.dayDate = null
+                return;
             }
-            if(this.configTypeMatch('date')){
-                this.dayDate = dateOrRange
+            if (typeof dateOrRange === 'object' && dateOrRange.start_at) {
+                this.dayDate = [getModelValue(dateOrRange.start_at), getModelValue(dateOrRange.end_at)]
+            }
+            if (this.configTypeMatch('date')) {
+                this.dayDate = getModelValue(dateOrRange)
                 return
             }
-            if(this.configTypeMatch('time')){
-                this.dayDate = dateOrRange.toLocaleString()
+            if (this.configTypeMatch('time')) {
+                this.dayDate = getModelValue(dateOrRange)
                 return
             }
 
@@ -145,7 +155,7 @@ export function webplusDateTime(dayDate, config) {
 
             return this.upperCaseF(date.toLocaleDateString(config.lang, {month: 'long', year: "numeric"}))
         },
-        daysText : [],
+        daysText: [],
         getDates() {
             let date = new Date(Date.parse(this.day)),
                 dates = []
@@ -164,23 +174,23 @@ export function webplusDateTime(dayDate, config) {
          * @param {Date} date
          */
         startOfWeek(date) {
-            if(date.getDay()===0) {
-                return new Date(date.setDate(date.getDate() -6))
+            if (date.getDay() === 0) {
+                return new Date(date.setDate(date.getDate() - 6))
             }
-            if(date.getDay()===1) {
-                date.setDate(- 6)
+            if (date.getDay() === 1) {
+                date.setDate(-6)
             }
             return new Date(date.setDate(date.getDate() - date.getDay() + 1))
         },
         upMonth() {
             let date = new Date(this.day)
-            this.day = new Date(date.setMonth(date.getMonth() + 1)).toISOString()
+            this.day = new Date(date.setMonth(date.getMonth() + 1))
             this.getDates()
         },
         downMonth() {
             let date = new Date(this.day)
             //this.month = date.getMonth() - 1
-            this.day = new Date(date.setMonth(date.getMonth() - 1)).toISOString()
+            this.day = new Date(date.setMonth(date.getMonth() - 1))
             this.getDates()
         },
         getMonthNames() {
@@ -196,7 +206,7 @@ export function webplusDateTime(dayDate, config) {
             this.selectedDay = null
             this.rangeSelected = this._rangeSelected = {start_at: null, end_at: null}
             this.periodRange = this._periodRange = null
-            dayDate = null
+            this.dayDate = null
 
         },
         configTypeMatch(match) {
@@ -209,8 +219,10 @@ export function webplusDateTime(dayDate, config) {
             }
             return config.type.match(match) !== null
         },
+        valueText : null,
         value() {
             let options = {};
+
             if (this.selectedDay && !this.configTypeMatch('range')) {
                 if (this.configTypeMatch('datetime')) {
                     options.hour = 'numeric'
@@ -230,7 +242,7 @@ export function webplusDateTime(dayDate, config) {
             }
 
             if (this.configTypeMatch('range')) {
-                if (this.rangeSelected.start_at) {
+                if (this.rangeSelected.start_at && this.rangeSelected.end_at) {
                     return `${this.rangeSelected.start_at.toLocaleDateString(config.lang)} - ${this.rangeSelected.end_at.toLocaleDateString(config.lang)}`
                 }
             }

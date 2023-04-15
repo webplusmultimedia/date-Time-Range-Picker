@@ -1,4 +1,4 @@
-import {isGreaterThan, Period} from "./Support/dateSupport";
+import {isGreaterThan, Period,setSelectedDate} from "./Support/dateSupport";
 
 /**
  *
@@ -32,6 +32,7 @@ export function listeDate(date) {
             if (this.period) {
                 if (!this.period.isBetween(this.date)) return
             }
+
             /*if (!this.selectedDay && this.configTypeMatch('time')) {
                 this.date.setHours(this.config.minTime)
                 this.date.setMinutes(0)
@@ -48,11 +49,11 @@ export function listeDate(date) {
                     this._rangeSelected = this.resetRange()
                     this.set_selectedDay(this.rangeSelected)
                     this.periodRange = Period.createFromRange(this.rangeSelected)
+                    this.show = !this.show
                 }
                 return;
             }
-            this.selectedDay = new Date(this.date.getFullYear(),this.date.getMonth(),this.selectedDay.getDate(),this.selectedDay.getHours(),this.selectedDay.getMinutes())
-            this.set_selectedDay(this.selectedDay)
+            setSelectedDate(this)
             this.showDateTime()
         },
         /* Events binding for date btn */

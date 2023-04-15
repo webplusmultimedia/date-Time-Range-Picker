@@ -19,6 +19,6 @@ class DateTimeRangePickerServiceProvider extends PackageServiceProvider
             ->name('date-time-range-picker')
             ->hasConfigFile()
             ->hasViews()
-            ->hasViewComponent(prefix: 'webplusm', viewComponentName: DateTimeRangePicker::class);
+            ->hasViewComponents(prefix: 'webplusm', viewComponentName: DateTimeRangePicker::class);
     }
 }

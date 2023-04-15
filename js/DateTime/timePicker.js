@@ -1,4 +1,4 @@
-import {StringTime} from "./Support/dateSupport";
+import {StringToTime} from "./Support/dateSupport";
 
 /**
  *
@@ -8,7 +8,7 @@ import {StringTime} from "./Support/dateSupport";
 export function timePicker (config, value) {
     return {
         config,
-        value : new StringTime(value,config),
+        value : new StringToTime(value,config),
         value_text : null,
         show : false,
         toggle(){
