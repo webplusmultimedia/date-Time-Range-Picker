@@ -2,6 +2,10 @@
 
 All notable changes to `date-time-range-picker` will be documented in this file.
 
+## fix : time && range min max date - 2023-04-15
+
+- fix : time && range min max date
+
 ## fix for type = time - 2023-04-14
 
 - fix returning time for type = time
