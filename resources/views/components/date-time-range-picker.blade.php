@@ -10,7 +10,7 @@
         <input type="text" x-model="value" :id="$id('text-input')" x-on:click="toggle" class="cursor-pointer"
                readonly
         >
-        <div class="flex justify-between absolute right-3 bottom-0">
+        <div class="flex justify-between absolute right-3 bottom-2">
             <button x-on:click.prevent="clearDate" x-show="selectedDay">
                 <x-date-time-range-picker::icons.close class="w-3 text-gray-300 hover:text-red-600"/>
             </button>
