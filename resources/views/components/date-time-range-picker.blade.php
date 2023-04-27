@@ -7,11 +7,12 @@
 >
     <div class="relative" >
         <label :for="$id('text-input')">{{ $label }}</label>
-        <input type="text" x-model="value" :id="$id('text-input')" x-on:click="toggle" class="cursor-pointer"
-               readonly
-        >
-        <div class="flex justify-between absolute right-3 bottom-2">
-            <button x-on:click.prevent="clearDate" x-show="selectedDay">
+
+        <div class="relative">
+            <input type="text" x-model="value" :id="$id('text-input')" x-on:click="toggle" class="cursor-pointer"
+                                                 readonly
+            >
+            <button x-on:click.prevent="clearDate" x-show="selectedDay" class="absolute right-3 bottom-0 top-0">
                 <x-date-time-range-picker::icons.close class="w-3 text-gray-300 hover:text-red-600"/>
             </button>
         </div>
