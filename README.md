@@ -40,7 +40,7 @@ module.exports = {
 
 In your ./resources/js/app.js, import the js file
 ```js
-import './../../vendor/webplusmultimedia/filemanager/resources/dist/js/filemanager'
+import './../../vendor/webplusmultimedia/filemanager/resources/dist/js/date_time_range'
 ```
 ### Changing color theme
 
